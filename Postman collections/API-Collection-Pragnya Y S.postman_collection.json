@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "efcc4350-fb01-4d46-97f6-9515c6e570a4",
+		"name": "API-Collection-Pragnya Y S",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"response = pm.response.json();\r",
+							"currentuser = null;\r",
+							"\r",
+							"pm.test(\"Every user has title of type string\", function(){\r",
+							"    for(i=1;i<response.lenght;i++){\r",
+							"        currentuser= response[i]\r",
+							"        pm.expect(currentuser.title).to.be.a(\"string\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The userId of user with id 40 is 4\", function(){\r",
+							"    for(i=0;;i++){\r",
+							"        currentuser= response[i]\r",
+							"        \r",
+							"        if (currentuser.id==40){\r",
+							"            pm.expect(currentuser.userId).to.equal(4);\r",
+							"            break;\r",
+							"        }\r",
+							"        \r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain_name_1}}/posts",
+					"host": [
+						"{{domain_name_1}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"response = pm.response.json();\r",
+							"currentuser = null;\r",
+							"\r",
+							"pm.test(\"Verify if updated values are correct\",function(){\r",
+							"    pm.expect(response.first_name).to.equal(\"Amith\");\r",
+							"   pm.expect(response.last_name).to.equal(\"Kumar\");\r",
+							"   pm.expect(response.email).to.equal(\"amith.kumar@reqres.in\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"first_name\", response.first_name);\r",
+							"pm.environment.set(\"last_name\", response.last_name);\r",
+							"pm.environment.set(\"email\", response.email);\r",
+							"\r",
+							"pm.test(\"Check whether field UpdatedAt is present\", function(){\r",
+							"    pm.expect(response).to.have.property(\"updatedAt\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"amith.kumar@reqres.in\",\r\n \"first_name\": \"Amith\",\r\n  \"last_name\": \"Kumar\",\r\n   \"avatar\": \"\",\r\n    \"id\": \"664\",\r\n     \"createdAt\": \"2022-02-15T15:18:16.933Z\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain_name_2}}/users/",
+					"host": [
+						"{{domain_name_2}}"
+					],
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"email\", \"amith.k@reqres.in\");\r",
+							"pm.environment.set(\"first_name\", \"Amit\");\r",
+							"\r",
+							"response = pm.response.json();\r",
+							"currentuser = null;\r",
+							"\r",
+							"pm.test(\"Verify values match with response\",function(){\r",
+							"    pm.expect(response.first_name).to.equal(pm.environment.get(\"first_name\"));\r",
+							"    pm.expect(response.email).to.equal(pm.environment.get(\"email\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"email\": \"amith.k@reqres.in\",\r\n \"first_name\": \"Amit\",\r\n  \"last_name\": \"K\", \r\n  \"avatar\": \"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain_name_2}}/users",
+					"host": [
+						"{{domain_name_2}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

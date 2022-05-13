@@ -1,0 +1,71 @@
+#%RAML 1.0
+types:
+  GetUsersFemale:
+    items:
+      properties:
+        id:
+          example: "2482"
+          type: string
+        name:
+          example: Karthik Kocchar
+          type: string
+        email:
+          example: kartik_kocchar@rutherford.io
+          type: string
+        gender:
+          example: female
+          type: string
+        status:
+          example: inactive
+          type: string
+  PostRequest:
+    properties:
+      Userdetails:
+        items:
+          properties:
+            post_id:
+              example: "2003"
+              type: string
+            id:
+              example: "1978"
+              type: string
+            name:
+              example: Bhaaswar Pothuvaal III
+              type: string
+  GetActiveFemaleRequest:
+    properties:
+      Name:
+        example: Gorakhanatha Chaturvedi
+        type: string
+      Status:
+        example: active
+        type: string
+      Gender:
+        example: female
+        type: string
+title: Major Assignment Pragnya Y S
+description: Get list of users who are female
+mediaType:
+  - application/json
+protocols:
+  - HTTP
+/milestone1:
+  get:
+    responses:
+      "200":
+        body:
+          type: GetUsersFemale
+          items:
+            type: object
+/milestone2:
+  post:
+    responses:
+      "201":
+        body:
+          type: PostRequest
+/milestone3:
+  get:
+    responses:
+      "200":
+        body:
+          type: GetActiveFemaleRequest
